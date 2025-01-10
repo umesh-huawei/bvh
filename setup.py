@@ -27,8 +27,8 @@ from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 NAME = 'bvh_distance_queries'
 DESCRIPTION = 'BVH operations'
 URL = ''
-EMAIL = 'wzielonka'
-AUTHOR = 'Wojciech Zielonka'
+EMAIL = 'vassilis.choutas@tuebingen.mpg.de'
+AUTHOR = 'Vassilis Choutas'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '1.0.1'
 
