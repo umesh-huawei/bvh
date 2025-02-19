@@ -33,6 +33,7 @@
 
 imgui.ini
 
-build
+build*
 cmake-build-*
 data
+*.egg-info
