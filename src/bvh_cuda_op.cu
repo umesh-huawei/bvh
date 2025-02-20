@@ -1081,9 +1081,12 @@ void bvh_distance_queries_kernel(
   int gridSize = std::min(
       32 * numSMs, static_cast<int>((num_points + blockSize - 1) / blockSize));
 
+  const auto& the_type = triangles.scalar_type();
+  at::ScalarType _st = the_type;
+
   // Construct the bvh tree
   AT_DISPATCH_FLOATING_TYPES(
-      triangles.type(), "bvh_tree_building", ([&] {
+      _st, "bvh_tree_building", ([&] {
       // using scalar_t = float;
 
 #if PRINT_TIMINGS == 1
@@ -1299,9 +1302,12 @@ void bvh_ray_intersection_kernel(
   int gridSize = std::min(
       32 * numSMs, static_cast<int>((num_points + blockSize - 1) / blockSize));
 
+  const auto& the_type = triangles.scalar_type();
+  at::ScalarType _st = the_type;
+
   // Construct the bvh tree
   AT_DISPATCH_FLOATING_TYPES(
-      triangles.type(), "bvh_tree_building", ([&] {
+      _st, "bvh_tree_building", ([&] {
       // using scalar_t = float;
 
 #if PRINT_TIMINGS == 1
@@ -1665,8 +1671,11 @@ void ray_sampler_kernel(
     cudaDeviceGetAttribute(&numSMs, cudaDevAttrMultiProcessorCount, 0);
     int gridSize = std::min(32 * numSMs, static_cast<int>((n_rays + blockSize - 1) / blockSize));
 
+    const auto& the_type = triangles.scalar_type();
+    at::ScalarType _st = the_type;
+
     AT_DISPATCH_FLOATING_TYPES(
-      triangles.type(), "sampling_tetras", ([&] {
+      _st, "sampling_tetras", ([&] {
 
             long *ray_indices_ptr;
             cudaMalloc((void **)&ray_indices_ptr, n_samples * sizeof(long));
